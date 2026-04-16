@@ -1,0 +1,43 @@
+gallery:
+  title: "Sample Sculpture Collection"
+  institution: "Museum Gallery Template"
+  description: "A demonstration gallery with placeholder sculptures. Replace these with your own photogrammetry scans."
+
+template: long-hall
+theme:
+  walls: marble-white
+  floor: hardwood-dark
+  ambient: warm
+
+sculptures:
+  - file: sculptures/placeholder-column.glb
+    title: "Classical Form I"
+    artist: "Template Artist"
+    date: "2026"
+    medium: "Digital"
+    description: "A placeholder sculpture demonstrating the gallery layout. Replace this GLB file with your own 3D scan."
+    spotlight: true
+
+  - file: sculptures/placeholder-bust.glb
+    title: "Portrait Study"
+    artist: "Template Artist"
+    date: "2026"
+    medium: "Digital"
+    description: "This placeholder represents a portrait bust. The pedestal will auto-size to fit your model."
+    spotlight: true
+
+  - file: sculptures/placeholder-abstract.glb
+    title: "Abstract Form"
+    artist: "Template Artist"
+    date: "2026"
+    medium: "Digital"
+    description: "An abstract form demonstrating that the gallery works with non-representational sculpture as well."
+
+navigation:
+  mode: waypoint
+  show_minimap: true
+
+accessibility:
+  keyboard_navigation: true
+  screen_reader_labels: true
+  reduced_motion: false

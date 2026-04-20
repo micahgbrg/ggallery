@@ -112,6 +112,7 @@ export function loadConfig(rawYaml: string): GalleryConfig {
       image: rawSculpture.image,
       spotlight: rawSculpture.spotlight !== undefined ? rawSculpture.spotlight : (defaultSculptureConfig.spotlight as boolean),
       scale: scale,
+      on_pedestal: rawSculpture.on_pedestal !== undefined ? rawSculpture.on_pedestal : (defaultSculptureConfig.on_pedestal as boolean),
     };
   });
 

@@ -56,6 +56,7 @@ function SculptureModel({ config, position, onSelect }: SculptureModelProps) {
   const scene = useMemo(() => gltf.scene.clone(), [gltf.scene]);
 
   const scale = config.scale || 1.0;
+  const showPedestal = config.on_pedestal !== false; // default true
 
   // Calculate bounding box and dimensions
   const boundingBox = useMemo(() => {
@@ -68,9 +69,9 @@ function SculptureModel({ config, position, onSelect }: SculptureModelProps) {
   const scaledSizeX = size.x * scale;
   const scaledSizeZ = size.z * scale;
   const pedSize = Math.max(scaledSizeX, scaledSizeZ, 0.5) * 1.3; 
-  const pedHeight = 1.0;
+  const pedHeight = showPedestal ? 1.0 : 0;
 
-  // Align bottom of model to y=pedHeight
+  // Align bottom of model to the top of the pedestal (or floor when on_pedestal: false)
   const modelYOffset = pedHeight - (boundingBox.min.y * scale);
 
   // Apply subtle highlight (emissive boost) on hover
@@ -107,7 +108,7 @@ function SculptureModel({ config, position, onSelect }: SculptureModelProps) {
 
   return (
     <group position={position}>
-      <Pedestal width={pedSize} depth={pedSize} height={pedHeight} />
+      {showPedestal && <Pedestal width={pedSize} depth={pedSize} height={pedHeight} />}
       <group position={[0, modelYOffset, 0]} scale={[scale, scale, scale]}>
         <primitive
           object={scene}

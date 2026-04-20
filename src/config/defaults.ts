@@ -20,5 +20,6 @@ export const defaultAccessibility: GalleryAccessibility = {
 
 export const defaultSculptureConfig: Partial<SculptureConfig> = {
   spotlight: false,
-  scale: 1.0
+  scale: 1.0,
+  on_pedestal: true,
 };

@@ -75,6 +75,29 @@ sculptures:
     (err: Error) => err.message.includes("sculpture at index 0 is missing required field 'title'")
   );
 
+  // Test 5: on_pedestal defaults to true
+  const noPedestalFieldYaml = `
+gallery:
+  title: "My Gallery"
+sculptures:
+  - file: "sculpture1.glb"
+    title: "Default Pedestal"
+  `;
+  const noPedestalConfig = loadConfig(noPedestalFieldYaml);
+  assert.strictEqual(noPedestalConfig.sculptures[0].on_pedestal, true);
+
+  // Test 6: on_pedestal: false is passed through
+  const noPedestalYaml = `
+gallery:
+  title: "My Gallery"
+sculptures:
+  - file: "statue.glb"
+    title: "Floor Statue"
+    on_pedestal: false
+  `;
+  const floorConfig = loadConfig(noPedestalYaml);
+  assert.strictEqual(floorConfig.sculptures[0].on_pedestal, false);
+
   console.log('All loader tests passed!');
 }
 

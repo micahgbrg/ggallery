@@ -34,6 +34,8 @@ export interface SculptureConfig {
   image?: string;
   spotlight: boolean;
   scale: number;
+  /** When false, the sculpture renders directly on the floor with no generated pedestal. Default: true */
+  on_pedestal: boolean;
 }
 
 export interface GalleryMetadata {
@@ -62,6 +64,7 @@ export interface RawSculptureConfig {
   image?: string;
   spotlight?: boolean;
   scale?: number;
+  on_pedestal?: boolean;
 }
 
 export interface RawGalleryMetadata {

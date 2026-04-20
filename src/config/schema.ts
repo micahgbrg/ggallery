@@ -15,6 +15,7 @@ export interface GalleryTheme {
 export interface GalleryNavigation {
   mode: NavigationMode;
   show_minimap: boolean;
+  fov: number;
 }
 
 export interface GalleryAccessibility {

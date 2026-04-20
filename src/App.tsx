@@ -60,7 +60,7 @@ function App() {
 
       {galleryConfig && TemplateComponent && (
         <div className="flex-1 w-full relative">
-          <Canvas shadows frameloop="demand" camera={{ fov: 60 }}>
+          <Canvas shadows frameloop="demand" camera={{ fov: galleryConfig.navigation.fov }}>
             <LoadingTracker onProgress={setLoadProgress} />
             <Suspense fallback={null}>
               <TemplateComponent 

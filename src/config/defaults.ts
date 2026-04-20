@@ -8,7 +8,8 @@ export const defaultTheme: GalleryTheme = {
 
 export const defaultNavigation: GalleryNavigation = {
   mode: "waypoint",
-  show_minimap: true
+  show_minimap: true,
+  fov: 60
 };
 
 export const defaultAccessibility: GalleryAccessibility = {

@@ -70,7 +70,8 @@ export function loadConfig(rawYaml: string): GalleryConfig {
   
   const navigation = {
     mode,
-    show_minimap: rawNav.show_minimap !== undefined ? rawNav.show_minimap : defaultNavigation.show_minimap
+    show_minimap: rawNav.show_minimap !== undefined ? rawNav.show_minimap : defaultNavigation.show_minimap,
+    fov: typeof rawNav.fov === 'number' ? rawNav.fov : defaultNavigation.fov
   };
 
   const rawAccess = raw.accessibility || {};

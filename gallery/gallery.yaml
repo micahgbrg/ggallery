@@ -36,6 +36,7 @@ sculptures:
 navigation:
   mode: waypoint
   show_minimap: true
+  fov: 90
 
 accessibility:
   keyboard_navigation: true

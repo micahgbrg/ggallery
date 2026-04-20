@@ -5,7 +5,7 @@ import type { SculptureConfig } from '../config/schema';
 import { Pedestal } from './Pedestal';
 
 class SculptureErrorBoundary extends React.Component<
-  { config: SculptureConfig; position: [number, number, number]; children: React.ReactNode },
+  { config: SculptureConfig; position: [number, number, number]; onSelect: (sculpture: SculptureConfig) => void; children: React.ReactNode },
   { hasError: boolean }
 > {
   constructor(props: any) {
@@ -31,7 +31,7 @@ class SculptureErrorBoundary extends React.Component<
       return (
         <group position={this.props.position}>
           <Pedestal width={pedSize} depth={pedSize} height={pedHeight} />
-          <mesh position={[0, pedHeight + boxSize / 2, 0]} castShadow>
+          <mesh position={[0, pedHeight + boxSize / 2, 0]} castShadow onClick={(e) => { e.stopPropagation(); this.props.onSelect(this.props.config); }}>
             <boxGeometry args={[boxSize, boxSize, boxSize]} />
             <meshBasicMaterial color="#ff0000" wireframe />
           </mesh>
@@ -133,12 +133,12 @@ export function Sculpture(props: SculptureModelProps) {
   // Pre-load the GLTF file quietly to avoid some suspense waterfall if needed,
   // but useGLTF handles caching internally anyway.
   return (
-    <SculptureErrorBoundary config={props.config} position={props.position}>
+    <SculptureErrorBoundary config={props.config} position={props.position} onSelect={props.onSelect}>
       <Suspense fallback={
         <group position={props.position}>
           <Pedestal width={1.0} depth={1.0} height={1.0} />
           {/* Subtle placeholder while loading */}
-          <mesh position={[0, 1.5, 0]} castShadow>
+          <mesh position={[0, 1.5, 0]} castShadow onClick={(e) => { e.stopPropagation(); props.onSelect(props.config); }}>
             <boxGeometry args={[0.5, 0.5, 0.5]} />
             <meshBasicMaterial color="#cccccc" wireframe />
           </mesh>

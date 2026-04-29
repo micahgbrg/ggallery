@@ -122,7 +122,10 @@ export function CameraAnimator({
   useFrame(() => {
     if (!isAnimating.current) return;
 
-    const factor = reducedMotion ? 1.0 : 0.2;
+    // moveFactor: how fast the camera travels between waypoints (arrow keys)
+    // lookFactor: fast when click-dragging, slow when transitioning between waypoints
+    const moveFactor = reducedMotion ? 1.0 : 0.05;
+    const lookFactor = reducedMotion ? 1.0 : (isDragging.current ? 0.2 : 0.05);
 
     // Apply mouse look angles using spherical coordinates for correct axis rotation regardless of hallway orientation
     const baseDir = new THREE.Vector3().subVectors(destTarget.current, destPos.current);
@@ -139,11 +142,11 @@ export function CameraAnimator({
     const finalDir = new THREE.Vector3().setFromSpherical(spherical).multiplyScalar(distance);
     const destTargetOffset = new THREE.Vector3().copy(destPos.current).add(finalDir);
 
-    currentPos.current.lerp(destPos.current, factor);
+    currentPos.current.lerp(destPos.current, moveFactor);
 
     const destMat = new THREE.Matrix4().lookAt(destPos.current, destTargetOffset, camera.up);
     const destQuat = new THREE.Quaternion().setFromRotationMatrix(destMat);
-    currentQuat.current.slerp(destQuat, factor);
+    currentQuat.current.slerp(destQuat, lookFactor);
 
     camera.position.copy(currentPos.current);
     camera.quaternion.copy(currentQuat.current);

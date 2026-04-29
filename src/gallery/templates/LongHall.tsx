@@ -17,7 +17,8 @@ export const metadata: TemplateMetadata = {
 export function generateWaypoints(sculptures: SculptureConfig[]): WaypointDef[] {
   const SPACING = 4;
   const PADDING = 3;
-  const length = Math.ceil(sculptures.length / 2) * SPACING + 2 * PADDING;
+  const Z_STEP = SPACING / 2;
+  const length = sculptures.length * Z_STEP + 2 * PADDING;
   const w: WaypointDef[] = [];
   
   w.push({
@@ -30,7 +31,7 @@ export function generateWaypoints(sculptures: SculptureConfig[]): WaypointDef[] 
   sculptures.forEach((sculpture, i) => {
     const isRight = i % 2 !== 0;
     const x = isRight ? 2.5 : -2.5;
-    const z = PADDING + Math.floor(i / 2) * SPACING;
+    const z = PADDING + i * Z_STEP;
     
     w.push({
       id: `sculpture-${i}`,
@@ -54,16 +55,17 @@ export function generateWaypoints(sculptures: SculptureConfig[]): WaypointDef[] 
 export default function LongHall({ sculptures, theme, onSelect }: TemplateProps) {
   const SPACING = 4;
   const PADDING = 3;
+  const Z_STEP = SPACING / 2;
   const WIDTH = 8;
   const HEIGHT = 4;
   
-  const length = Math.ceil(sculptures.length / 2) * SPACING + 2 * PADDING;
+  const length = sculptures.length * Z_STEP + 2 * PADDING;
 
   const placements = useMemo<PlacedSculpture[]>(() => {
     return sculptures.map((config, i) => {
       const isRight = i % 2 !== 0;
       const x = isRight ? 2.5 : -2.5;
-      const z = PADDING + Math.floor(i / 2) * SPACING;
+      const z = PADDING + i * Z_STEP;
       return { config, position: [x, 0, z] };
     });
   }, [sculptures]);
